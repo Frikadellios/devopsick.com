@@ -1,3 +1,29 @@
 {
-  "extends": "astro/tsconfigs/strict"
+  "extends": "astro/tsconfigs/base",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "jsxImportSource": "react",
+    "verbatimModuleSyntax": true,
+    "baseUrl": ".",
+    "paths": {
+      "@styles/*":["src/styles/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@pages/*": ["src/pages/*"],
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@lottie/*": ["src/components/lottie/*"],
+      "@utils/*": ["src/components/utils/*"],
+      "@elements/*": ["src/components/elements/*"],
+      "@sections/*": ["src/components/sections/*"],
+      "@navbar/*": ["src/components/navbar/*"],
+      "@ui/*":["src/components/ui/*"],
+    },
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      },
+    ],
+  }
 }

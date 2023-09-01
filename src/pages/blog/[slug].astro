@@ -5,7 +5,7 @@ import type Article from '../../interfaces/article';
 
 export async function getStaticPaths() {
   const articles = await fetchApi<Article[]>({
-    endpoint: 'articles?populate=cover',
+    endpoint: 'articles?populate=*',
     wrappedByKey: 'data',
   });
 
@@ -28,18 +28,13 @@ const article = Astro.props;
 
   <body>
     <main>
-      <img src={import.meta.env.STRAPI_URL + article.attributes.cover.data.attributes.url} />
+      <img src={import.meta.env.STRAPI_URL + article.attributes.image.data.attributes.url} />
 
       <h1>{article.attributes.title}</h1>
 
       <!-- Render plain text -->
       <p>{article.attributes.content}</p>
-      <!-- Render markdown -->
-      <MyMardownComponent>
-        {article.attributes.content}
-      </MyMardownComponent>
-      <!-- Render html -->
-      <Fragment set:html={article.attributes.content} />
+
     </main>
   </body>
 </html>
