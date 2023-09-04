@@ -12,10 +12,7 @@
 		"start": "astro dev",
 		"build": "astro build",
 		"preview": "astro preview",
-		"astro": "astro",
-		"i18n:install": "astro-i18n install",
-		"i18n:sync": "astro-i18n sync",
-		"i18n:extract:keys": "astro-i18n extract:keys"
+		"astro": "astro"
 	},
 	"dependencies": {
 		"@astrojs/mdx": "^1.0.0",
@@ -31,7 +28,6 @@
 		"@types/react": "^18.2.21",
 		"@types/react-dom": "^18.2.7",
 		"astro": "^3.0.4",
-		"astro-i18n": "^1.8.1",
 		"astro-seo": "^0.8.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
