@@ -14,6 +14,7 @@ export default interface Article {
         readingTime: string;
         visibility: boolean;
         locale: string;
+        imageurl: string;
         cover: {
             data: Image | null;
         };

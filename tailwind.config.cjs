@@ -5,6 +5,7 @@ module.exports = {
 	corePlugins: {
 		preflight: true,
 	  },
+	darkMode: "class",
 	theme: {
 		extend: {
 			colors: {
@@ -73,7 +74,7 @@ module.exports = {
 				
 			  },
 			fontFamily: {
-				Inter: "Inter",
+				sans: ["Inter Variable", "Inter", ...defaultTheme.fontFamily.sans],
 			  },
 			  screens: {
 				xs: "530px",
@@ -88,5 +89,4 @@ module.exports = {
 	},
 	plugins: [require("@tailwindcss/typography"), require('@tailwindcss/aspect-ratio'), require('@tailwindcss/forms'),
 ],
-	darkMode: "class",
 };

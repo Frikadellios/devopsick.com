@@ -1,7 +1,7 @@
 ---
-
-import fetchApi from '../../lib/strapi';
-import type Article from '../../interfaces/article';
+import PostLayout from "@layouts/PostLayout.astro";
+import fetchApi from "@lib/strapi";
+import type Article from "@interfaces/article";
 
 export async function getStaticPaths() {
   const articles = await fetchApi<Article[]>({
@@ -20,21 +20,32 @@ const article = Astro.props;
 
 ---
 
-<!DOCTYPE html>
-<html lang="en">
+<PostLayout>
   <head>
-    <title>{article.attributes.title}</title>
+  <meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="generator" content={Astro.generator} />
+  <title>{article.attributes.title}</title>
   </head>
+  <main>
+    <article class="max-w-5xl mx-auto px-3">
+      <!-- Image -->
+      <img class="rounded-xl mx-auto" style="mx-auto rounded-md shadow-lg bg-gray-400 dark:bg-slate-700 w-full"
+      width={500} height={1260}
+      aspectRatio="16:10" loading="lazy" src={import.meta.env.STRAPI_URL + article.attributes.image.data.attributes.url} alt={article.attributes.title} />
+    
+      <header class="text-center">
+        <h1>{article.attributes.title}</h1>
+      </header>
 
-  <body>
-    <main>
-      <img src={import.meta.env.STRAPI_URL + article.attributes.image.data.attributes.url} />
-
-      <h2>{article.attributes.title}</h1>
-
-      <!-- Render plain text -->
-      <p>{article.attributes.content}</p>
-
+      <!-- Content -->
+      <section class="max-w-3xl mx-auto py-6 lg:py-12 content">
+        <p>{article.attributes.content}</p>
+      </section>
+    </article>
     </main>
-  </body>
-</html>
+</PostLayout>

@@ -1,5 +1,6 @@
 import type Article from "./article";
 import type Tag from "./tag";
+import type Image from "./image";
 
 export default interface Category {
     id: number;
@@ -10,6 +11,10 @@ export default interface Category {
         createdAt: string;
         updatedAt: string;
         locale: string;
+        slugy: string;
+        cover: {
+            data: Image | null;
+        };
         articles: {
             data: Article[];
         };
@@ -18,3 +23,4 @@ export default interface Category {
         }
     };
 }
+

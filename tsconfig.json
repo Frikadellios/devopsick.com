@@ -13,12 +13,13 @@
       "@pages/*": ["src/pages/*"],
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
-      "@lottie/*": ["src/components/lottie/*"],
       "@utils/*": ["src/components/utils/*"],
       "@elements/*": ["src/components/elements/*"],
       "@sections/*": ["src/components/sections/*"],
       "@navbar/*": ["src/components/navbar/*"],
       "@ui/*":["src/components/ui/*"],
+      "@lib/*":["src/lib/*"],
+      "@interfaces/*":["src/interfaces/*"],
     },
     "plugins": [
       {
