@@ -1,0 +1,74 @@
+---
+
+import TagsLayout from "@layouts/TagsLayout.astro";
+import fetchApi from "@lib/strapi";
+import type Tag from "@interfaces/tag";
+import { getImageUrl } from "@lib/image";
+import { ImageStrapiFormat } from "@interfaces/image";
+
+export async function getStaticPaths() {
+  const tag = await fetchApi<Tag[]>({
+    endpoint: 'tags?populate=*',
+    wrappedByKey: 'data',
+  });
+
+  return tag.map((tag) => ({
+    params: { slug: tag.attributes.slug},
+    props: tag, 
+  }));
+}
+type Props = Tag;
+
+const tag = Astro.props;
+
+const { articles, updatedAt, createdAt, name, description, cover } =
+    tag.attributes;
+
+---
+
+<TagsLayout>
+ <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="generator" content={Astro.generator} />
+  <title>{tag.attributes.slugy}</title>
+  </head>
+  <main>
+    <categories class="max-w-5xl mx-auto px-3">
+      <!-- Image -->
+      <img class="rounded-xl mx-auto" style="mx-auto rounded-md shadow-lg bg-gray-400 dark:bg-slate-700 w-full"
+      width={500} height={1260}
+      src={import.meta.env.STRAPI_URL + tag.attributes.image.data.attributes.url} alt={tag.attributes.title} />
+    
+      <header class="text-center">
+        <h1>{tag.attributes.name}</h1>
+      </header>
+
+      <!-- Content -->
+      <section class="max-w-3xl mx-auto py-6 lg:py-12 content">
+        
+        {articles.data?.map((article) => (
+            <ul>
+            <a href={`/blog/${article.attributes.slug}/`}><h2 class="title">{article.attributes.name}</h2></a>
+             <img
+                        width={1200}
+                        height={810}
+                        src={getImageUrl(
+                            ImageStrapiFormat.LARGE,
+                            article.attributes.getImageUrl
+                        )}
+                        alt=""
+                    />
+            <p class="date"><FormattedDate date={article.attributes.publishedAt} /></p>
+            <p>{article.attributes.description}</p>
+            </ul>
+        ))
+    }
+      </section>
+    </categories>
+    </main>
+</TagsLayout>

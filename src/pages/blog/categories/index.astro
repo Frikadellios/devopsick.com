@@ -1,0 +1,38 @@
+---
+import CategoryLayout from "@layouts/CategoryLayout.astro";
+import fetchApi from "@lib/strapi";
+import type Category from "@interfaces/category";
+import "@fontsource-variable/inter/index.css";
+
+const categories = await fetchApi<Category[]>({
+  endpoint: 'categories?populate=*',
+  wrappedByKey: 'data',
+});
+
+---
+
+<CategoryLayout>
+ <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="generator" content={Astro.generator} />
+  </head>
+  <main>
+    
+        <ul>
+            {
+              categories.map((category) => (
+                <a href={`/blog/${category.attributes.slug}/`}>
+                  {category.attributes.title}
+                </a>
+                
+              ))
+            }
+          </ul>
+
+    </main>
+</CategoryLayout>

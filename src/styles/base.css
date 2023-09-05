@@ -9,11 +9,22 @@
     background-color: #111418; 
   }
   h1 {
-    @apply text-5xl bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent;
+    @apply text-5xl bg-gradient-to-b from-white to-gray-400 bg-clip-text font-bold text-transparent ;
   }
 
   h2 {
-    @apply text-2xl lg:leading-tight;
+    @apply bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent text-3xl sm:text-4xl;
+  }
+
+  h3 {
+    @apply my-5 mx-5 mt-6 text-gray-400;
+  }
+
+  h4 {
+    @apply my-5 mx-5 block w-full bg-gradient-to-b from-white to-gray-400 bg-clip-text font-bold text-transparent;
+  }
+  p {
+    @apply mx-auto my-4 w-full max-w-xl bg-transparent leading-relaxed tracking-wide text-gray-400;
   }
 
   .text-color {

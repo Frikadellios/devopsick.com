@@ -1,0 +1,39 @@
+---
+import TagsLayout from "@layouts/TagsLayout.astro";
+import fetchApi from "@lib/strapi";
+import type Tag from "@interfaces/tag";
+import "@fontsource-variable/inter/index.css";
+
+const tags = await fetchApi<Tag[]>({
+  endpoint: 'tags?populate=*',
+  wrappedByKey: 'data',
+});
+
+---
+
+<TagsLayout>
+ <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="generator" content={Astro.generator} />
+
+  </head>
+  <main>
+    
+        <ul>
+            {
+              tags.map((tag) => (
+                <a href={`/blog/${tag.attributes.slug}/`}>
+                  {tag.attributes.name}
+                </a>
+                
+              ))
+            }
+          </ul>
+
+    </main>
+</TagsLayout>

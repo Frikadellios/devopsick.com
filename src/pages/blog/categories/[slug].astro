@@ -8,12 +8,12 @@ import { getImageUrl } from "@lib/image";
 import { ImageStrapiFormat } from "@interfaces/image";
 
 export async function getStaticPaths() {
-  const categories = await fetchApi<Category[]>({
+  const category = await fetchApi<Category[]>({
     endpoint: 'categories?populate=*',
     wrappedByKey: 'data',
   });
 
-  return categories.map((category) => ({
+  return category.map((category) => ({
     params: { slug: category.attributes.slug},
     props: category, 
   }));
@@ -36,17 +36,17 @@ const { articles, updatedAt, createdAt, name, description, cover } =
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="generator" content={Astro.generator} />
-  <title>{category.attributes.name}</title>
+  <title>{category.attributes.title}</title>
   </head>
   <main>
     <categories class="max-w-5xl mx-auto px-3">
       <!-- Image -->
       <img class="rounded-xl mx-auto" style="mx-auto rounded-md shadow-lg bg-gray-400 dark:bg-slate-700 w-full"
       width={500} height={1260}
-      src={import.meta.env.STRAPI_URL + category.attributes.image.data.attributes.url} alt={category.attributes.name} />
+      src={import.meta.env.STRAPI_URL + category.attributes.image.data.attributes.url} alt={category.attributes.title} />
     
       <header class="text-center">
-        <h1>{category.attributes.name}</h1>
+        <h1>{category.attributes.title}</h1>
       </header>
 
       <!-- Content -->

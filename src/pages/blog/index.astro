@@ -19,15 +19,10 @@ const articles = await fetchApi<Article[]>({
               {article.attributes.title}
             </a>
             <div class="wrap">
-  
-  <div class="circle">
-
-    <img src={import.meta.env.STRAPI_URL + article.attributes.image.data.attributes.url} />
-
-    </div>
-  
-</div>
-            
+              <div class="circle">
+                <img src={import.meta.env.STRAPI_URL + article.attributes.image.data.attributes.url} />
+               </div>
+           </div>
           ))
         }
       </ul>
